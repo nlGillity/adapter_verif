@@ -1,0 +1,13 @@
+.vscode/
+.fleet/
+.idea/
+
+**/build
+
+*.vcd
+.env
+**.o
+logs
+*.log*
+all_tests.robot
+sim/tests/benchmarks/coremark/src/**
