@@ -1,0 +1,32 @@
+{
+  "name": "gcc-renode-verilator",
+  "build": { "dockerfile": "Dockerfile" },
+    "remoteUser": "root",
+  "remoteEnv": {
+    "SHELL": "/usr/bin/zsh",
+    "CROSS_PREFIX": "/home/developer/sc-dt/riscv-gcc/bin/riscv64-unknown-elf-",
+    "PATH": "${containerEnv:PATH}:${containerWorkspaceFolder}/renode",
+    "EXAMPLE_ENV": "${localEnv:EXAMPLE_ENV}"
+  },
+  "features": {
+        "ghcr.io/devcontainers-contrib/features/zsh-plugins:0": {
+            "plugins": "ssh-agent npm git",
+            "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
+            "username": "developer"
+        }
+    },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "donjayamanne.python-extension-pack",
+        "ms-vscode.makefile-tools",
+        "ms-vscode.cpptools-extension-pack",
+        "13xforever.language-x86-64-assembly",
+        "penguinsnail.riscv-formatter",
+        "ms-python.black-formatter",
+        "ms-python.flake8",
+        "tomoki1207.pdf"
+      ]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# running in tests/main/adapter_yadro_formal/src/
+read -sv -formal adapter.sv
+prep -top adapter
+
+hierarchy -smtcheck
+rename -witness
+write_jny -no-connections ../model/design.json
+write_rtlil ../model/design.il

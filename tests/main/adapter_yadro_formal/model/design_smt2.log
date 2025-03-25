@@ -1,0 +1,63 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.39+147 (git sha1 0a854cf4c, g++ 11.4.0-1ubuntu1~22.04 -fPIC -Os)
+
+-- Executing script file `design_smt2.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: design_prep.il
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \adapter
+
+2.2. Analyzing design hierarchy..
+Top module:  \adapter
+Removed 0 unused modules.
+Module adapter directly or indirectly contains formal properties -> setting "keep" attribute.
+
+3. Executing FORMALFF pass.
+
+4. Executing DFFUNMAP pass (unmap clock enable and synchronous reset from FFs).
+
+5. Printing statistics.
+
+=== adapter ===
+
+   Number of wires:                 52
+   Number of wire bits:             57
+   Number of public wires:          26
+   Number of public wire bits:      29
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                 53
+     $add                            1
+     $and                            9
+     $anyinit                        8
+     $assert                         6
+     $assume                         4
+     $eq                             2
+     $ff                             7
+     $initstate                      1
+     $mux                            7
+     $not                            5
+     $or                             1
+     $reduce_or                      1
+     $sub                            1
+
+6. Executing SMT2 backend.
+
+6.1. Executing BMUXMAP pass.
+
+6.2. Executing DEMUXMAP pass.
+Creating SMT-LIBv2 representation of module adapter.
+
+End of script. Logfile hash: 4b9e1b9a40, CPU: user 0.00s system 0.00s, MEM: 12.48 MB peak
+Yosys 0.39+147 (git sha1 0a854cf4c, g++ 11.4.0-1ubuntu1~22.04 -fPIC -Os)
+Time spent: 52% 2x write_smt2 (0 sec), 32% 2x read_ilang (0 sec), ...

@@ -1,0 +1,8 @@
+default:
+  tags:
+    - common
+
+include:
+  - project: verif/ci
+    ref: master
+    file: run-tests_8.yml
