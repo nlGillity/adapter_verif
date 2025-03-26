@@ -4,5 +4,5 @@ default:
 
 include:
   - project: verif/ci
-    ref: master
-    file: run-tests_8.yml
+    ref: 2025_verif_l7
+    file: run-tests.yml
