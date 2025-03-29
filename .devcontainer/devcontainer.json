@@ -1,6 +1,7 @@
 {
   "name": "gcc-renode-verilator",
   "build": { "dockerfile": "Dockerfile" },
+  "image": "hihidrdi/verif",
     "remoteUser": "root",
   "remoteEnv": {
     "SHELL": "/usr/bin/zsh",
