@@ -57,11 +57,11 @@ RUN pip install robotframework==6.0.2 \
                 # For downloading sc-dt from official release page.
                 gdown==5.2.0
 
-RUN sudo apt-get -y install build-essential clang bison flex \
+RUN sudo apt-get update &&  sudo apt-get -y install build-essential clang bison flex \
                 libreadline-dev gawk tcl-dev libffi-dev git \
                 graphviz xdot pkg-config python3 zlib1g-dev
+
 RUN python3 -m pip install click
-RUN pip install cocotb
 
 RUN git config --global http.sslverify "false"
 
@@ -78,8 +78,6 @@ RUN cd /home/developer
 RUN git clone https://github.com/Z3Prover/z3.git --recurse-submodules
 RUN cd /home/developer/z3 && python3 scripts/mk_make.py
 RUN cd /home/developer/z3/build && make && sudo make install
-
-RUN sudo apt-get update && sudo apt-get -y install gtkwave
 
 USER $CONTAINER_USERNAME
 ENV HOME /home/$CONTAINER_USERNAME
