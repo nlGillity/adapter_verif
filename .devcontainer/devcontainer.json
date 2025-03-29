@@ -1,6 +1,6 @@
 {
   "name": "gcc-renode-verilator",
-  "build": { "dockerfile": "Dockerfile" },
+  // "build": { "dockerfile": "Dockerfile" },
   "image": "hihidrdi/verif",
     "remoteUser": "root",
   "remoteEnv": {
