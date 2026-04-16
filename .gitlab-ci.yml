@@ -1,8 +1,7 @@
 default:
   tags:
     - common
-
 include:
-  - project: verif/ci
-    ref: 2025_verif_l7
-    file: run-tests.yml
+  - project: education/verif/2026/verif-soc/ci
+    ref: master
+    file: run-tests_8.yml
