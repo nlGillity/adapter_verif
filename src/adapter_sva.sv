@@ -62,5 +62,21 @@ always_ff @(posedge clk) begin
 
         // ====================================================================
 
+        // Если преобразователь получает кредит, то при наличии valid_i 
+        // он обязан им воспользовать для передачи данных.
+
+        if (credit_i)
+            if (valid_i)
+                h3: assert (ready_o && valid_o);
+
+        /*
+            h3: assert property (
+                @(posedge clk) disable iff (!rst_n)
+                (credit_i && valid_i) |-> (ready_o && valid_o)
+            );
+        */
+
+        // ====================================================================
+
     end
 end
