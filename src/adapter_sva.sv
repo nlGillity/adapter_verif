@@ -4,12 +4,32 @@
 //
 // спецификация лежит в doc/adapter.md
 
+/* Notes:
+    Помимо описания формальных выражений через immediate assertions
+    я решил попробовать решить задачи ещё и через concurrent assertions
+    (для удобства я расположил их ниже immediate-ов, хотя, стоило бы 
+    их вынести из блока always).
+*/
+
 always_ff @(posedge clk) begin
-    if (valid_o)
-        h0: assert (valid_i);
+    if (rst_n) begin
 
-//  if (...)
-//      h1: ...
+        // ====================================================================
+        
+        // Преобразователь не может произвольно установить valid_o, 
+        // если нет valid_i.
 
-// и так далее
+        if (valid_o)
+            h0: assert (valid_i);
+
+        /*
+            h0: assert property (
+                @(posedge clk) disable iff (!rst_n)
+                valid_o |-> valid_i
+            );
+        */
+
+        // ====================================================================
+
+    end
 end
