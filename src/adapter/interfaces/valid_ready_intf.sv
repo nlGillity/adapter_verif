@@ -17,20 +17,20 @@ interface valid_ready_intf (
     // SVA
     //===========================================================================
 
-    // valid_stable_a: assert property (
-    //     @(posedge clk) disable iff (~rst_n)
-    //     valid && !ready |=> valid
-    // ) else $error(
-    //     $time(), 
-    //     " The valid signal have changed after being set without a handshake."
-    // );
+    valid_stable_a: assert property (
+        @(posedge clk) disable iff (~rst_n)
+        valid && !ready |=> valid
+    ) else $error(
+        $time(), 
+        " The valid signal have changed after being set without a handshake."
+    );
 
-    // data_stable_a: assert property (
-    //     @(posedge clk) disable iff (~rst_n)
-    //     valid && !ready |=> $stable(data)
-    // ) else $error(
-    //     $time(), 
-    //     " The data have changed after valid being set without a handshake."
-    // );
+    data_stable_a: assert property (
+        @(posedge clk) disable iff (~rst_n)
+        valid && !ready |=> $stable(data)
+    ) else $error(
+        $time(), 
+        " The data have changed after valid being set without a handshake."
+    );
 
 endinterface
