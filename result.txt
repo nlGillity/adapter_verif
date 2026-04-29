@@ -1,0 +1,114 @@
+- V e r i l a t i o n   R e p o r t: Verilator 5.048 2026-04-26 rev v5.048-56-gc233a3905
+- Verilator: Built from 0.260 MB sources in 31 modules, into 0.399 MB in 69 C++ files needing 0.003 MB
+- Verilator: Walltime 6.422 s (elab=0.004, cvt=0.022, bld=6.381); cpu 0.068 s on 12 threads; allocated 59.594 MB
+./build/Vadapter_tb
+
+=====================================================
+Name: Test (Normal)
+Desc: The frequency of reqesting and credit reflling
+is the same.
+------------------ Configurations -------------------
+Tests's enviroment configs:
+        packet_num              = 300
+        timeout                 = 10000
+
+Master's driver configs:
+        master_driver_min_delay = 0
+        master_driver_max_delay = 10
+
+Slave's driver configs:
+        slave_driver_min_delay  = 2
+        slave_driver_max_delay  = 2
+-------------------- Simulation ---------------------
+Simulating...
+PASSED
+=====================================================
+
+=====================================================
+Name: Test (Exhaustion)
+Desc: Scenario of spending all credits without
+refilling.
+------------------ Configurations -------------------
+Tests's enviroment configs:
+        packet_num              = 20
+        timeout                 = 100
+
+Master's driver configs:
+        master_driver_min_delay = 0
+        master_driver_max_delay = 0
+
+Slave's driver configs:
+        slave_driver_min_delay  = 134283265
+        slave_driver_max_delay  = 1073741827
+-------------------- Simulation ---------------------
+Simulating...
+Timeout!
+PASSED
+=====================================================
+
+=====================================================
+Name: Test (Overwhelmed)
+Desc: The adapter is overloaded with requests,
+credits are received rarely.
+------------------ Configurations -------------------
+Tests's enviroment configs:
+        packet_num              = 300
+        timeout                 = 10000
+
+Master's driver configs:
+        master_driver_min_delay = 0
+        master_driver_max_delay = 2
+
+Slave's driver configs:
+        slave_driver_min_delay  = 10
+        slave_driver_max_delay  = 20
+-------------------- Simulation ---------------------
+Simulating...
+PASSED
+=====================================================
+
+=====================================================
+Name: Test (Overflow)
+Desc: Scenario in which requests come much less
+freqenlty than the credit signal.
+------------------ Configurations -------------------
+Tests's enviroment configs:
+        packet_num              = 300
+        timeout                 = 10000
+
+Master's driver configs:
+        master_driver_min_delay = 2
+        master_driver_max_delay = 20
+
+Slave's driver configs:
+        slave_driver_min_delay  = 0
+        slave_driver_max_delay  = 1
+-------------------- Simulation ---------------------
+Simulating...
+PASSED
+=====================================================
+
+=====================================================
+Name: Test (Intensive)
+Desc: Scenario of intensive requesting and refilling.
+------------------ Configurations -------------------
+Tests's enviroment configs:
+        packet_num              = 300
+        timeout                 = 10000
+
+Master's driver configs:
+        master_driver_min_delay = 1
+        master_driver_max_delay = 2
+
+Slave's driver configs:
+        slave_driver_min_delay  = 0
+        slave_driver_max_delay  = 2
+-------------------- Simulation ---------------------
+Simulating...
+PASSED
+=====================================================
+
+=====================================================
+All tests PASSED
+=====================================================
+- src/adapter/adapter_tb.sv:114: Verilog $finish
