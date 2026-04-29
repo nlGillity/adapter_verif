@@ -2,93 +2,133 @@
 
 module adapter_tb;
 
-parameter CP = 10 ;
-parameter MSG1 = 3'b011;
-parameter MSG_LEN = $size(MSG1);
+    logic clk;
+    logic rst_n; 
 
-logic [MSG_LEN-1:0] tx_msg = MSG1;
-logic [MSG_LEN-1:0] rx_msg = 'b0;
+    import test_pkg::*;
 
+    //=============================================================================
+    // Parameters
+    //=============================================================================
 
-logic clk;
-logic rst_n; 
-logic valid_i = 1;
-logic data_i = 0;
-logic ready_o;
-logic valid_o;
-logic data_o;
-logic credit_i = 0;
+    localparam int TEST_NUM       = 5;
+    localparam int CLOCK_PERIOD   = 10;
+    localparam int RESET_DURATION = 20;
 
-initial begin
-    $display("%d %d %d",data_o,valid_o,ready_o);
-end
+    //=============================================================================
+    // Interfaces
+    //=============================================================================
 
-initial begin
-    clk = 0; 
-    forever begin
-        #(CP/2) clk = ~clk;
+    valid_ready_intf  vrf (clk, rst_n);
+    valid_credit_intf vcf (clk, rst_n);
+
+    //=============================================================================
+    // DUT
+    //=============================================================================
+
+    adapter DUT (
+        .clk      ( clk        ),
+        .rst_n    ( rst_n      ),
+
+        .valid_i  ( vrf.valid  ),
+        .data_i   ( vrf.data   ),
+        .ready_o  ( vrf.ready  ),
+
+        .valid_o  ( vcf.valid  ),
+        .data_o   ( vcf.data   ),
+        .credit_i ( vcf.credit )
+    );
+
+    //=============================================================================
+    // General Tasks
+    //=============================================================================
+
+    // Clocking
+    initial begin
+        clk = 0; 
+        forever begin
+            #(CLOCK_PERIOD / 2) clk = ~clk;
+        end
     end
-end
 
-initial begin
-    rst_n = 1;
-    #40 rst_n = 0;
-    #40 rst_n = 1;
+    // Reseting
+    task reset();
+        rst_n = 1'b0;
+        vrf.valid  = 1'b0;
+        vrf.data   = 1'b0;
+        vcf.credit = 1'b0;
+        repeat (RESET_DURATION) @(posedge clk);
+        rst_n = 1'b1;
+    endtask
 
-    #40 credit_i = 1;
-    $display("credit_send");
-    #10 credit_i = 0;
+    //=============================================================================
+    // Test Scenarios
+    //=============================================================================
 
+    int  passed_num;
+    test test_scenarios [$];
 
-    #50 compare_rx_tx();
-    $finish();
+    test_normal      scenario_normal      = new(vrf, vcf);
+    test_exhaustion  scenario_exhaustion  = new(vrf, vcf);
+    test_overwhelmed scenario_overwhelmed = new(vrf, vcf);
+    test_overflow    scenario_overflow    = new(vrf, vcf);
+    test_intensive   scenario_intensive   = new(vrf, vcf);
 
-end
+    //-----------------------------------------------------------------------------
 
-task automatic compare_rx_tx();
-    logic[MSG_LEN-1:0] rez = rx_msg ^ MSG1;
-    logic rez1 = (|rez);
-    $display("%b, %b, %d",rx_msg,tx_msg,rez); 
-    if (rez1 == 0)
-        $display("PASSED");
-    else
-        $display("FAILED");
-endtask 
+    function void tests_randomize(output test tests []);
+        tests = {
+            scenario_normal,
+            scenario_exhaustion,
+            scenario_overwhelmed,
+            scenario_overflow,
+            scenario_intensive
+        };
+        test_scenarios.shuffle();
+    endfunction
 
-always_ff @(posedge clk or negedge rst_n) begin : tx
-    if(~rst_n)
-        tx_msg <= MSG1;
-    else if (valid_i & ready_o) begin
-        tx_msg <= {tx_msg[0],tx_msg[MSG_LEN-1:1]};
-        $display("tx: %g %b, %b, %b",$time,data_i, valid_i,ready_o);
+    task tests_run(test tests []);
+        foreach (tests[i]) begin
+            reset();
+            repeat (2) @(posedge clk);
+            tests[i].run();
+            passed_num += int'(tests[i].passed);
+        end
+    endtask
+
+    function void print_result();
+        $display("\n=====================================================");
+        if (passed_num == TEST_NUM) $display("All tests PASSED");
+        else                        $display("Some tests FAILED");
+        $display("=====================================================");
+    endfunction
+
+    //=============================================================================
+    // Running Tests
+    //=============================================================================
+
+    initial begin
+        tests_randomize(test_scenarios);
+        tests_run(test_scenarios);
+        print_result();
+        $finish();
     end
-end
 
-assign data_i = tx_msg[0];
+    //=============================================================================
+    // SVA
+    //============================================================================= 
 
-    
-always_ff @( posedge clk or negedge rst_n ) begin : rx
-    if (~rst_n)
-        credit_i <= 0;
-    else if (valid_o) begin
-        rx_msg <= {data_o,rx_msg[MSG_LEN-1:1]};
-        $display("rx: %g %b, %b",$time,data_o, valid_o);
-    end
-end
+    /* verilator lint_off SYNCASYNCNET */
+    property handshake_p;
+        @(posedge clk) disable iff (!rst_n)
+        vcf.valid |-> vrf.valid && vrf.ready
+    endproperty
+    /* verilator lint_on SYNCASYNCNET */
 
-
-adapter dut(
-    .clk(clk),
-    .rst_n(rst_n),
-
-    .valid_i(valid_i),
-    .data_i(data_i),
-    .ready_o(ready_o),
-
-    .valid_o(valid_o),
-    .data_o(data_o),
-    .credit_i(credit_i)
-);
-
+    handshake_a: assert property (handshake_p) else 
+    $error(
+        "%0d [vcf.valid = 1] |-> real {valid_i, ready_o} = {%b, %b}; expected {1 , 0}", 
+        $time, vrf.valid, vrf.ready
+    );
 
 endmodule
