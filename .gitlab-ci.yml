@@ -1,8 +1,0 @@
-default:
-  tags:
-    - common
-include:
-  - project: education/verif/2026/verif-soc/ci
-    ref: master
-    file: run-tests_9.yml
-
