@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2024-05-12T11:21:17" hostname="4deff1e92263" package="adapter" id="0" name="yadro_formal" tests="6" errors="0" failures="0" time="0" skipped="0">
+<properties>
+<property name="os" value="Linux"/>
+<property name="expect" value="PASS"/>
+<property name="status" value="PASS"/>
+</properties>
+<testcase classname="yadro_formal" name="build execution" time="0">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:9.9-9.29" time="0" type="ASSERT" location="adapter_sva.sv:9.9-9.29" id="h0">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:12.9-12.38" time="0" type="ASSERT" location="adapter_sva.sv:12.9-12.38" id="h1">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:15.9-15.29" time="0" type="ASSERT" location="adapter_sva.sv:15.9-15.29" id="h2">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:18.9-18.29" time="0" type="ASSERT" location="adapter_sva.sv:18.9-18.29" id="h3">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:21.9-21.29" time="0" type="ASSERT" location="adapter_sva.sv:21.9-21.29" id="h4">
+</testcase>
+<testcase classname="yadro_formal" name="Property ASSERT in adapter at adapter_sva.sv:25.9-25.30" time="0" type="ASSERT" location="adapter_sva.sv:25.9-25.30" id="h5">
+</testcase>
+<system-out>SBY 11:21:16 [tests/main/adapter_yadro_formal] Removing directory '/workspaces/lesson8/tests/main/adapter_yadro_formal'.
+SBY 11:21:16 [tests/main/adapter_yadro_formal] Copy '/workspaces/lesson8/tests/main/adapter.sv' to '/workspaces/lesson8/tests/main/adapter_yadro_formal/src/adapter.sv'.
+SBY 11:21:16 [tests/main/adapter_yadro_formal] Copy '/workspaces/lesson8/src/adapter_sva.sv' to '/workspaces/lesson8/tests/main/adapter_yadro_formal/src/adapter_sva.sv'.
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: smtbmc z3
+SBY 11:21:16 [tests/main/adapter_yadro_formal] base: starting process &quot;cd tests/main/adapter_yadro_formal/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY 11:21:16 [tests/main/adapter_yadro_formal] base: finished (returncode=0)
+SBY 11:21:16 [tests/main/adapter_yadro_formal] prep: starting process &quot;cd tests/main/adapter_yadro_formal/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY 11:21:16 [tests/main/adapter_yadro_formal] prep: finished (returncode=0)
+SBY 11:21:16 [tests/main/adapter_yadro_formal] smt2: starting process &quot;cd tests/main/adapter_yadro_formal/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY 11:21:16 [tests/main/adapter_yadro_formal] smt2: finished (returncode=0)
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: starting process &quot;cd tests/main/adapter_yadro_formal; yosys-smtbmc -s z3 --presat --noprogress -t 20  --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc model/design_smt2.smt2&quot;
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Solver: z3
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 0..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 0..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 1..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 1..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 2..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 2..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 3..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 3..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 4..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 4..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 5..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 5..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 6..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 6..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 7..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 7..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 8..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 8..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 9..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 9..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 10..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 10..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 11..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 11..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 12..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 12..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 13..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 13..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 14..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 14..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 15..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 15..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 16..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 16..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 17..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 17..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 18..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 18..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assumptions in step 19..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Checking assertions in step 19..
+SBY 11:21:16 [tests/main/adapter_yadro_formal] engine_0: ##   0:00:00  Status: passed
+SBY 11:21:17 [tests/main/adapter_yadro_formal] engine_0: finished (returncode=0)
+SBY 11:21:17 [tests/main/adapter_yadro_formal] engine_0: Status returned by engine: pass
+SBY 11:21:17 [tests/main/adapter_yadro_formal] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 11:21:17 [tests/main/adapter_yadro_formal] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY 11:21:17 [tests/main/adapter_yadro_formal] summary: engine_0 (smtbmc z3) returned pass
+SBY 11:21:17 [tests/main/adapter_yadro_formal] summary: engine_0 did not produce any traces
+SBY 11:21:17 [tests/main/adapter_yadro_formal] DONE (PASS, rc=0)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

@@ -1,0 +1,16 @@
+[tasks]
+yadro_formal_h2
+
+[options]
+mode bmc
+
+[engines]
+smtbmc z3
+
+[script]
+read -sv -formal adapter.sv
+prep -top adapter
+
+[files]
+tests/h2/adapter.sv
+src/adapter_sva.sv
